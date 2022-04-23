@@ -1,0 +1,2 @@
+# bilemo
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c03dc6447d94493e93ce65c0d39e92ac)](https://app.codacy.com/gh/weezycode/bilemo?utm_source=github.com&utm_medium=referral&utm_content=weezycode/bilemo&utm_campaign=Badge_Grade_Settings)
