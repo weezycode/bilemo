@@ -5,39 +5,11 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
 use Doctrine\Common\Collections\Collection;
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
-#[ApiResource(
-    attributes: ["pagination_items_per_page" => 5],
-    normalizationContext: ['groups' => ['user:list']],
-    collectionOperations: [
-        'get' => [
-            'path' => '/customers/{id}/users',
-            'requirements' => ['id' => '\d+'],
-            'controller' => UserController::class,
-        ],
-        'post' => [
-            'path' => '/customers/{id}/users',
-            'requirements' => ['id' => '\d+'],
-            'controller' => UserController::class,
-        ],
-    ],
-    itemOperations: [
-        'get' => [
-            'path' => '/customers/{customerId}/users/{userId}',
-            'requirements' => ['customerId' => '\d+', "userId" => "\d+"],
-            'controller' => UserController::class,
-        ],
-        'delete' => [
-            'path' => '/customers/{customerId}/users/{userId}',
-            'requirements' => ['customerId' => '\d+', "userId" => "\d+"],
-            'controller' => UserController::class,
-        ],
-    ],
-)]
+
 
 class Customer
 {
