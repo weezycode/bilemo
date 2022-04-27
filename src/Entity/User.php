@@ -13,7 +13,34 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-
+#[ApiResource(
+    attributes: ["pagination_items_per_page" => 5],
+    normalizationContext: ['groups' => ['user:list']],
+    collectionOperations: [
+        'get' => [
+            'path' => '/customers/{id}/users',
+            'requirements' => ['id' => '\d+'],
+            'controller' => UserController::class,
+        ],
+        'post' => [
+            'path' => '/customers/{id}/users',
+            'requirements' => ['id' => '\d+'],
+            'controller' => UserController::class,
+        ],
+    ],
+    itemOperations: [
+        'get' => [
+            'path' => '/customers/{customerId}/users/{userId}',
+            'requirements' => ['customerId' => '\d+', "userId" => "\d+"],
+            'controller' => UserController::class,
+        ],
+        'delete' => [
+            'path' => '/customers/{customerId}/users/{userId}',
+            'requirements' => ['customerId' => '\d+', "userId" => "\d+"],
+            'controller' => UserController::class,
+        ],
+    ],
+)]
 /**
  * @UniqueEntity(fields="email",  message="L'adresse email '{{ value }}' existe déja !")
  * @UniqueEntity(fields="pseudo",  message="Le pseudo '{{ value }}' existe déjà !")
