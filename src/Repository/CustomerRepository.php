@@ -2,11 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Customer;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Customer>
@@ -50,29 +51,27 @@ class CustomerRepository extends ServiceEntityRepository
     // /**
     //  * @return Customer[] Returns an array of Customer objects
     //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Customer
+    public function findByUser(User $user)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('c.user = :val')
+            ->setParameter('val', $user)
+            ->orderBy('c.id', 'ASC')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
+
+
+
+    public function findOneByCustomer($id, $user)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.user = :val')
+            ->andWhere('c.id = :val2')
+            ->setParameter('val', $user)
+            ->setParameter('val2', $id)
+            ->getQuery()
+            ->getResult();
+    }
 }

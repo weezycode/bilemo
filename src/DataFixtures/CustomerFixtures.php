@@ -2,26 +2,36 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Customer;
-use App\Service\MetaData;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use Faker;
+use App\Entity\customer;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class CustomerFixtures extends Fixture
+class CustomerFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $dataCustomers = new MetaData();
-        foreach ($dataCustomers->dataCustomer() as $customers) {
-            $customer = (new Customer())
-                ->setShopName($customers['shopName'])
-                ->setFirstName($customers['firstName'])
-                ->setLastName($customers['lastName'])
-                ->setEmail($customers['shopName'] . "@shop.fr")
+        $faker = Faker\Factory::create('fr_FR');
+
+        for ($i = 1; $i <= 15; $i++) {
+            $customer = new Customer();
+            $customer->setFirstName($faker->firstName())
+                ->setLastName($faker->lastName())
+                ->setEmail($faker->email())
+                ->setUser($this->getReference('user' . rand(1, 3)))
                 ->setCreatedAt(new \DateTimeImmutable);
             $manager->persist($customer);
+
             $manager->flush();
-            $this->setReference($customers['customer'], $customer);
         }
+    }
+
+
+    public function getDependencies(): array
+    {
+        return [
+            UserFixtures::class,
+        ];
     }
 }

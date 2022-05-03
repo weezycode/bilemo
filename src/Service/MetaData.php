@@ -41,12 +41,12 @@ class MetaData
 
     public function dataCustomer()
     {
-        $customers = [
-            ['shopName' => 'Mauritel', 'firstName' => 'Jack', 'lastName' => 'Jones', 'customer' => 'customer1'],
-            ['shopName' => 'Tonteltel', 'firstName' => 'Awa', 'lastName' => 'Bones', 'customer' => 'customer2'],
-            ['shopName' => 'Getel', 'firstName' => 'Amélie', 'lastName' => 'Carlos', 'customer' => 'customer3'],
+        $users = [
+            ['shopName' => 'Mauritel', 'firstName' => 'Jack', 'lastName' => 'Jones', 'user' => 'user1'],
+            ['shopName' => 'Tonteltel', 'firstName' => 'Awa', 'lastName' => 'Bones', 'user' => 'user2'],
+            ['shopName' => 'Getel', 'firstName' => 'Amélie', 'lastName' => 'Carlos', 'user' => 'user3'],
 
         ];
-        return $customers;
+        return $users;
     }
 }
