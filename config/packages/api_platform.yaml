@@ -9,8 +9,17 @@ api_platform:
                 name: Authorization
                 type: header
         versions: [3]
+    http_cache:
+        invalidation:
+            enabled: true
+            varnish_urls: ['%env(VARNISH_URL)%']
+        public: true
     defaults:
         url_generation_strategy: !php/const ApiPlatform\Core\Api\UrlGeneratorInterface::ABS_URL
+        cache_headers:
+            max_age: 0
+            shared_max_age: 3600
+            vary: ['Content-Type', 'Authorization', 'Origin']
         
 
 

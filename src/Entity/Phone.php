@@ -12,10 +12,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
     attributes: ["pagination_items_per_page" => 3],
     collectionOperations: [
-        'get',
+        'get' => ["force_eager" => true],
     ],
     itemOperations: [
-        'get',
+        'get' => ["force_eager" => true],
     ],
 )]
 class Phone
