@@ -3,21 +3,13 @@
 namespace App\Entity;
 
 
-use App\Attribute\UserAware;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Annotation\ApiSubresource;
-use ApiPlatform\Core\Api\UrlGeneratorInterface;
 use Hateoas\Configuration\Annotation as Hateoas;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Context;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Controller\UserController\GetCustomersController;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use App\Controller\UserController\GetByOneCustomerController;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
