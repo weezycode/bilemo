@@ -17,13 +17,17 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
-
+#[ApiProperty(fetchEager: true)]
 #[ApiResource(
+    routePrefix: 'v1',
+    deprecationReason: "Create or read a Customer instead",
+    sunset: "10/05/2020",
     attributes: ["pagination_items_per_page" => 5, "security" => "is_granted('ROLE_USER')"],
     normalizationContext: ['groups' => ['list:customer']],
     denormalizationContext: ['groups' => ['create:customer']],
     collectionOperations: [
         'get' => [
+            "path" => '/customers',
             "force_eager" => true,
             'normalization_context' => ['groups' => ['list:customer']],
             "security" => "is_granted('ROLE_USER')",
@@ -32,6 +36,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
         ],
         'post' => [
+            "path" => '/customers',
             'denormalization_context' => ['groups' => ['create:customer']],
             "security" => "is_granted('ROLE_USER')",
             "security_message" => "Veuillez vous connectez !",
@@ -39,12 +44,14 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
     ],
     itemOperations: [
         'get' => [
+            "path" => '/customers/{id}',
             "force_eager" => true,
             'normalization_context' => ['groups' => ['list:customer']],
             "security" => "is_granted('ROLE_USER')",
             "security_message" => "Veuillez vous connectez !",
         ],
         'delete' => [
+            "path" => '/customers/{id}',
             "security" => "is_granted('ROLE_USER')",
         ],
     ],
@@ -57,7 +64,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
  * 
  */
 
-class Customer
+class Customer_v1
 {
 
     #[ORM\Id]
@@ -73,7 +80,8 @@ class Customer
     /**
      * @Assert\NotBlank(message = "Le prénom est obligatoire.")
      */
-    #[Groups(['list:customer', 'create:customer'])]
+    #[Groups(['create:customer'])]
+    #[ApiProperty(deprecationReason: "Use the rating property instead")]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -99,7 +107,7 @@ class Customer
     #[Context([DateTimeNormalizer::FORMAT_KEY => 'd-m-Y'])]
     private $createdAt;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'customer')]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(referencedColumnName: 'id', unique: true)]
 
 
