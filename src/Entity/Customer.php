@@ -24,7 +24,6 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
     denormalizationContext: ['groups' => ['create:customer']],
     collectionOperations: [
         'get' => [
-            'path' => '/customers',
             "force_eager" => true,
             'normalization_context' => ['groups' => ['list:customer']],
             "security" => "is_granted('ROLE_USER')",
@@ -33,7 +32,6 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
         ],
         'post' => [
-            'path' => '/customers',
             'denormalization_context' => ['groups' => ['create:customer']],
             "security" => "is_granted('ROLE_USER')",
             "security_message" => "Veuillez vous connectez !",
@@ -41,14 +39,12 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
     ],
     itemOperations: [
         'get' => [
-            'path' => '/customers/{id}',
             "force_eager" => true,
             'normalization_context' => ['groups' => ['list:customer']],
             "security" => "is_granted('ROLE_USER')",
             "security_message" => "Veuillez vous connectez !",
         ],
         'delete' => [
-            'path' => '/customers/{id}',
             "security" => "is_granted('ROLE_USER')",
         ],
     ],
@@ -57,7 +53,6 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 
 /**
- * @Hateoas\Relation("self", href = "expr('/api/customers/' ~ object.getId())")
  * @UniqueEntity(fields="email",  message="L'adresse email '{{ value }}' existe déja !")
  * 
  */
