@@ -24,9 +24,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
-#[UserAware(userFieldName: "user_id")]
 #[ApiResource(
-    iri: "http://schema.org/Customer",
     attributes: ["pagination_items_per_page" => 5, "security" => "is_granted('ROLE_USER')"],
     normalizationContext: ['groups' => ['list:customer']],
     denormalizationContext: ['groups' => ['create:customer']],
@@ -71,16 +69,6 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 class Customer
 {
 
-    #[ApiProperty(
-        iri: "https://localhost:8000/api/customers",
-        attributes: [
-            "jsonld_context" => [
-                "@delete" => "http://yourcustomid.com",
-                "@type" => "http://www.w3.org/2001/XMLSchema#string",
-
-            ]
-        ]
-    )]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
