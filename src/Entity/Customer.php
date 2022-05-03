@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Hateoas\Configuration\Annotation as Hateoas;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -16,6 +17,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
+#[ApiProperty(fetchEager: true)]
 #[ApiResource(
     attributes: ["pagination_items_per_page" => 5, "security" => "is_granted('ROLE_USER')"],
     normalizationContext: ['groups' => ['list:customer']],
@@ -23,6 +25,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
     collectionOperations: [
         'get' => [
             'path' => '/customers',
+            "force_eager" => true,
             'normalization_context' => ['groups' => ['list:customer']],
             "security" => "is_granted('ROLE_USER')",
             "security_message" => "Veuillez vous connectez !",
@@ -39,6 +42,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
     itemOperations: [
         'get' => [
             'path' => '/customers/{id}',
+            "force_eager" => true,
             'normalization_context' => ['groups' => ['list:customer']],
             "security" => "is_granted('ROLE_USER')",
             "security_message" => "Veuillez vous connectez !",
