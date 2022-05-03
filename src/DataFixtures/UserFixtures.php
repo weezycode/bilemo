@@ -2,28 +2,35 @@
 
 namespace App\DataFixtures;
 
-use Faker;
 use App\Entity\User;
+use App\Service\MetaData;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
+    private  $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
-        $faker = Faker\Factory::create('fr_FR');
-
-        for ($i = 1; $i <= 15; $i++) {
+        $dataCustomers = new MetaData();
+        foreach ($dataCustomers->dataCustomer() as $users) {
             $user = new User();
-            $user->setFirstName($faker->firstName())
-                ->setLastName($faker->lastName())
-                ->setPseudo($faker->userName())
-                ->setEmail($faker->email())
-                ->setCustomer($this->getReference('customer1'))
+            $user->setShopName($users['shopName'])
+                ->setFirstName($users['firstName'])
+                ->setLastName($users['lastName'])
+                ->setEmail($users['shopName'] . "@shop.fr")
+                ->setPassword($this->hasher->hashPassword($user, 'pass_1234'))
                 ->setCreatedAt(new \DateTimeImmutable);
             $manager->persist($user);
-
             $manager->flush();
+            $this->setReference($users['user'], $user);
         }
     }
 }

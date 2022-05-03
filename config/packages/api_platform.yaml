@@ -4,9 +4,15 @@ api_platform:
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:
-        versions: [3]
         api_keys:
-             apiKey:
+            apiKey:
                 name: Authorization
                 type: header
+        versions: [3]
+    defaults:
+        url_generation_strategy: !php/const ApiPlatform\Core\Api\UrlGeneratorInterface::ABS_URL
+        
+
+
+                
     

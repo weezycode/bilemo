@@ -14,6 +14,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
         "fakerphp/faker": "^1.19",
+        "jms/serializer-bundle": "^4.0",
         "lexik/jwt-authentication-bundle": "^2.15",
         "nelmio/cors-bundle": "^2.2",
         "phpdocumentor/reflection-docblock": "^5.3",
@@ -32,7 +33,8 @@
         "symfony/serializer": "6.0.*",
         "symfony/twig-bundle": "6.0.*",
         "symfony/validator": "6.0.*",
-        "symfony/yaml": "6.0.*"
+        "symfony/yaml": "6.0.*",
+        "willdurand/hateoas": "^3.8"
     },
     "config": {
         "allow-plugins": {
