@@ -36,6 +36,7 @@ security:
         - { path: ^/api/register, roles: PUBLIC_ACCESS }
         - { path: ^/api/customers, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/v1/, roles: IS_AUTHENTICATED_FULLY }
 when@test:
     security:
         password_hashers:
