@@ -15,11 +15,16 @@ final class CustomerDataPersister extends AbstractController implements ContextA
     {
         $this->customerRepository = $customerRepository;
     }
+    /**
+     * @return bool
+     */
     public function supports($data, array $context = []): bool
     {
         return $data instanceof Customer;
     }
-
+    /**
+     * @return bool
+     */
     public function persist($data, array $context = [])
     {
         // call your persistence layer to save $data
@@ -27,7 +32,9 @@ final class CustomerDataPersister extends AbstractController implements ContextA
             ->setUser($this->getUser());
         $this->customerRepository->add($data);
     }
-
+    /**
+     * @return bool
+     */
     public function remove($data, array $context = [])
     {
         $this->customerRepository->remove($data);

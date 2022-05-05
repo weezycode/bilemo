@@ -18,11 +18,17 @@ final class UserDataPersister extends AbstractController implements ContextAware
         $this->customerRepository = $customerRepository;
         $this->hasher = $hasher;
     }
+    /**
+     * @return bool
+     */
     public function supports($data, array $context = []): bool
     {
         return $data instanceof User;
     }
 
+    /**
+     * @return bool
+     */
     public function persist($data, array $context = [])
     {
         // call your persistence layer to save $data
@@ -31,6 +37,9 @@ final class UserDataPersister extends AbstractController implements ContextAware
         $this->customerRepository->add($data);
     }
 
+    /**
+     * @return bool
+     */
     public function remove($data, array $context = [])
     {
         $this->customerRepository->remove($data);

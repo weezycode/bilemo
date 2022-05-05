@@ -2,13 +2,30 @@ api_platform:
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
-        json: ['application/merge-patch+json','application/merge-patch+json;version1.0','application/merge-patch+json;version1.1']
+        json: ['application/merge-patch+json']
+        # The title of the API.
+    title: 'BILEMO'
+
+    # The description of the API.
+    description: 'Le réseau numéro 1 de vente mobile B to B'
+
+    # The version of the API.
+    version: '2.1.0'
+
+    openapi:
+        license:
+            # The license name used for the API.
+            name: 'V2.1.0 mise à jour le 05/05/2022 '
+
+
     swagger:
         api_keys:
             apiKey:
                 name: Authorization
                 type: header
         versions: [3]
+
+
     http_cache:
         invalidation:
             enabled: true
@@ -20,6 +37,8 @@ api_platform:
             max_age: 0
             shared_max_age: 3600
             vary: ['Content-Type', 'Authorization', 'Origin']
+    
+    
         
 
 
