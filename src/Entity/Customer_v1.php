@@ -17,42 +17,43 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
-#[ApiProperty(fetchEager: true)]
+
 #[ApiResource(
     routePrefix: 'v1',
     deprecationReason: "Create or read a Customer instead",
     sunset: "10/05/2020",
-    attributes: ["pagination_items_per_page" => 5, "security" => "is_granted('ROLE_USER')"],
+    attributes: ["pagination_items_per_page" => 5, "security" => "is_granted('ROLE_ADMIN')"],
     normalizationContext: ['groups' => ['list:customer']],
     denormalizationContext: ['groups' => ['create:customer']],
     collectionOperations: [
         'get' => [
-            "path" => '/customers',
+            'path' => '/customers',
             "force_eager" => true,
             'normalization_context' => ['groups' => ['list:customer']],
-            "security" => "is_granted('ROLE_USER')",
-            "security_message" => "Veuillez vous connectez !",
+            "security" => "is_granted('ROLE_ADMIN')",
+            "security_message" => "la nouvelle version: https://localhost:8000/api/customers !",
+
 
 
         ],
         'post' => [
-            "path" => '/customers',
+            'path' => '/customers',
             'denormalization_context' => ['groups' => ['create:customer']],
-            "security" => "is_granted('ROLE_USER')",
-            "security_message" => "Veuillez vous connectez !",
+            "security" => "is_granted('ROLE_ADMIN')",
+            "security_message" => "la nouvelle version: https://localhost:8000/api/customers !",
         ],
     ],
     itemOperations: [
         'get' => [
-            "path" => '/customers/{id}',
+            'path' => '/customers/{id}',
             "force_eager" => true,
             'normalization_context' => ['groups' => ['list:customer']],
-            "security" => "is_granted('ROLE_USER')",
-            "security_message" => "Veuillez vous connectez !",
+            "security" => "is_granted('ROLE_ADMIN')",
+            "security_message" => "la nouvelle version: https://localhost:8000/api/customers/{id} !",
         ],
         'delete' => [
-            "path" => '/customers/{id}',
-            "security" => "is_granted('ROLE_USER')",
+            'path' => '/customers/{id}',
+            "security" => "is_granted('ROLE_ADMIN')",
         ],
     ],
 
@@ -60,6 +61,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 
 /**
+ * 
  * @UniqueEntity(fields="email",  message="L'adresse email '{{ value }}' existe déja !")
  * 
  */
@@ -80,15 +82,13 @@ class Customer_v1
     /**
      * @Assert\NotBlank(message = "Le prénom est obligatoire.")
      */
-    #[Groups(['create:customer'])]
-    #[ApiProperty(deprecationReason: "Use the rating property instead")]
-    private $firstname;
+    #[Groups(['list:customer', 'create:customer'])]
+    private $firstName;
 
     #[ORM\Column(type: 'string', length: 255)]
-    /**
-     * @Assert\NotBlank(message = "Le nom est obligatoire.")
-     */
-    #[Groups(['list:customer', 'create:customer'])]
+
+    #[ApiProperty(deprecationReason: "Utilisez firstName")]
+
     private $lastName;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
@@ -108,7 +108,6 @@ class Customer_v1
     private $createdAt;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(referencedColumnName: 'id', unique: true)]
 
 
     #[Groups(['list:customer'])]
@@ -132,14 +131,14 @@ class Customer_v1
         return $this;
     }
 
-    public function getFirstname(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->firstname;
+        return $this->firstName;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstName(string $firstName): self
     {
-        $this->firstname = $firstname;
+        $this->firstName = $firstName;
 
         return $this;
     }

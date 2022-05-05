@@ -19,8 +19,8 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $dataCustomers = new MetaData();
-        foreach ($dataCustomers->dataCustomer() as $users) {
+        $dataUsers = new MetaData();
+        foreach ($dataUsers->dataUser() as $users) {
             $user = new User();
             $user->setShopName($users['shopName'])
                 ->setFirstName($users['firstName'])

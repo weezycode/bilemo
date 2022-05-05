@@ -53,6 +53,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 
 /**
+ * 
  * @UniqueEntity(fields="email",  message="L'adresse email '{{ value }}' existe déja !")
  * 
  */
@@ -74,7 +75,7 @@ class Customer
      * @Assert\NotBlank(message = "Le prénom est obligatoire.")
      */
     #[Groups(['list:customer', 'create:customer'])]
-    private $firstname;
+    private $firstName;
 
     #[ORM\Column(type: 'string', length: 255)]
     /**
@@ -100,7 +101,6 @@ class Customer
     private $createdAt;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'customer')]
-    #[ORM\JoinColumn(referencedColumnName: 'id', unique: true)]
 
 
     #[Groups(['list:customer'])]
@@ -124,14 +124,14 @@ class Customer
         return $this;
     }
 
-    public function getFirstname(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->firstname;
+        return $this->firstName;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstName(string $firstName): self
     {
-        $this->firstname = $firstname;
+        $this->firstName = $firstName;
 
         return $this;
     }

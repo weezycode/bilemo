@@ -23,7 +23,7 @@ class MetaData
         return $phones;
     }
 
-    public function dataUser()
+    public function dataCustomer()
     {
         $names = [
             ['firstName' => 'Mariame', 'lastName' => 'Bal'],
@@ -34,12 +34,21 @@ class MetaData
             ['firstName' => 'Pedro', 'lastName' => 'Dope'],
             ['firstName' => 'Michel', 'lastName' => 'Chem'],
             ['firstName' => 'Paul', 'lastName' => 'Laup'],
+            ['firstName' => 'Julien', 'lastName' => 'Cralo'],
+            ['firstName' => 'Baptiste', 'lastName' => 'Claude'],
+            ['firstName' => 'Kevin', 'lastName' => 'Durand'],
+            ['firstName' => 'Émilie', 'lastName' => 'Maury'],
+            ['firstName' => 'Catherine', 'lastName' => 'Guyon'],
+
+
+
+
 
         ];
         return $names;
     }
 
-    public function dataCustomer()
+    public function dataUser()
     {
         $users = [
             ['shopName' => 'Mauritel', 'firstName' => 'Jack', 'lastName' => 'Jones', 'user' => 'user1'],
