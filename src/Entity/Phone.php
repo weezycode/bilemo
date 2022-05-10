@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     attributes: ["pagination_items_per_page" => 3],
     collectionOperations: [
         'get' => ["force_eager" => true],
+
     ],
     itemOperations: [
         'get' => ["force_eager" => true],
