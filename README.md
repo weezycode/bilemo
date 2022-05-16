@@ -53,10 +53,10 @@ Bilemo REST API for mobile phone
       
 ## *Documentation*
 
- *And it's over, go in documentation =>  https://localhost:8000/api/docs*   
+ *documentation =>  https://localhost:8000/api/docs*   
 
 
-*If you want to get a token login with :* 
+*If you want a token login with :* 
 
 *Email*
 
