@@ -1,7 +1,8 @@
 <h1 align="center">
 Bilemo
 </h1>
-##  *BileMo is a company offering a whole selection of high-end cell phones*.
+
+## *BileMo is a company offering a whole selection of high-end cell phones*.
 
 *I am in charge of the development of the mobile showcase of the company BileMo. BileMo's business model is not to sell its products directly on the site, but to provide all platforms that wish to access the catalog via an API (Application Programming Interface). It is therefore a sale exclusively in B2B (business to business).*
 
