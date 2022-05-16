@@ -1,5 +1,5 @@
 <h1 align="center">
-Bilemo REST API for mobile phone
+Bilemo is a REST API for mobile phone
 </h1>
 
 ## *Bilemo is a company offering a whole selection of high-end cell phones*.
