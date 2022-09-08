@@ -17,6 +17,7 @@ class SecurityController extends AbstractController
         $this->jwtManager = $jwtManager;
         $this->tokenStorageInterface = $tokenStorageInterface;
     }
+    
     public function login()
     {
         $user = $this->getUser();
