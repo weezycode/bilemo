@@ -12,6 +12,6 @@ class DocumentationController extends AbstractController
      */
     public function home()
     {
-        return $this->redirectToRoute('api_entrypoint');
+        // return $this->redirectToRoute('api_entrypoint');
     }
 }
